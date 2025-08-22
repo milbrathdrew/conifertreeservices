@@ -1,49 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Glance Test Destination</title>
+  <title>External to Unqork Test</title>
 
-  <script 
-    id="glance-cobrowse"
-    data-groupid="21483"
-    data-site="staging"
-    src="https://www.glancecdn.net/cobrowse/CobrowseJS.ashx?groupid=21483&site=staging">
+  <script id="glance-cobrowse" 
+        charset="UTF-8" 
+        type="text/javascript" 
+        src="https://www.glancecdn.net/cobrowse/CobrowseJS.ashx?group=21483&site=staging" 
+        data-groupid="21483" 
+        data-site="staging" 
+        data-ws="www.glance.net" 
+        data-presence="on" 
+        data-cookietype="normal">
   </script>
 
 </head>
 <body>
-  <p><strong>Cross-Domain Helper:</strong> Using helper.html for cross-domain cobrowse functionality.</p>
-  <h1>Welcome to the Destination Domain!</h1>
-  <p>If cross-domain co-browse is working, the session is still active here.</p>
+  <p><strong>External → Unqork Setup:</strong> Using helper.html for cross-domain cobrowse functionality.</p>
+  <h1>External Domain (Origin)</h1>
+  <p>Starting cobrowse session here, then navigating to Unqork destination.</p>
   
-  <pre>
-⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢠⣾⣿⠟⠉⠁⠀⠈⠉⠻⢿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢠⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢸⣿⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠈⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠘⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠸⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣄⡀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⠿⠿⠟⠛⠛⠛⠋⠉⠉⠉⠉⠉⠉⠛⠿⣿⣿⣿⣿⣦⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣤⣤⣤⣤⣄⡀⠀⠀⠙⢿⣿⣿⣿⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⠿⠿⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⢻⣿⣿⡇⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⡀⠀⠀
-⠀⠀⣀⣤⣶⣾⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⣿⣿⣷⡄
-⠀⣴⣿⣿⠟⠛⠉⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⣄⡀⠀⠀⠀⠀⣀⣀⣠⣤⣤⣶⣶⣿⡿⠛⠁⠀⠘⣿⣿⣿
-⣸⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⢿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠛⠉⠁⠀⠀⠀⠀⠀⣹⣿⡿
-⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⡿⠃⠀⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⠇
-⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⡿⠋⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⡟⠀
-⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣴⣶⣾⣿⠿⠟⠉⠀⠀⠀⠀⠀⢻⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣾⣿⣿⡏⠀⠀
-⢸⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⣷⣶⣤⣤⣤⣤⣴⣶⣾⣿⡿⠟⠋⠹⣿⣿⡆⠀
-⠈⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡟⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⢹⣿⣿⠀
-⠀⢹⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⠀
-⠀⠀⢿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⡟⠀
-⠀⠀⠈⢿⣿⣿⣄⡀⠀⠀⠀⠀⠀⣼⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠛⢿⣿⣶⣤⣤⣀⣀⣀⣀⣠⣤⣴⣾⣿⣿⠿⠋⠀⠀
-⠀⠀⠀⠈⠻⣿⣿⣿⣷⣤⣤⣴⣾⣿⡿⠻⣿⣿⣿⣶⣦⣤⣤⣤⣤⣤⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⠛⠋⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠈⠛⠿⢿⣿⣿⡿⠟⠋⠀⠀⠀⠈⠉⠙⠛⠛⠻⠿⠿⠿⠿⠿⠿⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-  </pre>
+  <a href="#" id="start-cobrowse-jS">Generate Agent Code</a>
+  <br><br>
+  <a href="#" id="cross-domain-link" style="color: blue; text-decoration: underline; cursor: pointer;">Go to Unqork Test Domain</a>
+
+
+  <script>
+    const glanceButton = document.getElementById('start-cobrowse-jS');
+    
+    if (glanceButton) {
+      glanceButton.addEventListener('click', function (e) {
+        e.preventDefault();
+    
+        if (window.GLANCE?.Cobrowse?.Visitor?.startSession) {
+          GLANCE.Cobrowse.Visitor.startSession("GLANCE_KEYTYPE_RANDOM", {
+            customData: {
+              cleanUrl: window.location.origin + window.location.pathname
+            }
+          });
+        } else {
+          console.error("Glance Cobrowse is not ready or has not been loaded yet.");
+        }
+      });
+    } else {
+        console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
+    }
+
+    document.getElementById('cross-domain-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      const destination = "https://unqork-destination.com";
+
+      console.log("Link clicked. Checking for active Glance session...");
+
+      if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
+        console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
+        
+        GLANCE.Cobrowse.Visitor.crossDomain().then(function() {
+          console.log("crossDomain() completed successfully. Navigating now.");
+          window.open(destination, "_blank");
+        }).catch(function(error) {
+          console.error("The crossDomain() process failed.", error);
+          window.open(destination, "_blank");
+        });
+
+      } else {
+        console.error("No active session found. Navigating directly.");
+        window.open(destination, '_blank');
+      }
+    });
+  </script>
 
 </body>
 </html>
