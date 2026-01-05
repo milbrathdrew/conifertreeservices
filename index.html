@@ -26,47 +26,67 @@
 
 
   <script>
-    const glanceButton = document.getElementById('start-cobrowse-jS');
-    
-    if (glanceButton) {
-      glanceButton.addEventListener('click', function (e) {
-        e.preventDefault();
-    
-        if (window.GLANCE?.Cobrowse?.Visitor?.startSession) {
-          GLANCE.Cobrowse.Visitor.startSession("GLANCE_KEYTYPE_RANDOM", {
-            customData: {
-              cleanUrl: window.location.origin + window.location.pathname
-            }
-          });
-        } else {
-          console.error("Glance Cobrowse is not ready or has not been loaded yet.");
-        }
-      });
-    } else {
-        console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
+    // Wait for Glance to fully initialize before attaching event listeners
+    function initializeGlanceHandlers() {
+      const glanceButton = document.getElementById('start-cobrowse-jS');
+
+      if (glanceButton) {
+        glanceButton.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          if (window.GLANCE?.Cobrowse?.Visitor?.startSession) {
+            // Use options object format as per Glance documentation
+            GLANCE.Cobrowse.Visitor.startSession({
+              sessionKey: "GLANCE_KEYTYPE_RANDOM",
+              customData: {
+                cleanUrl: window.location.origin + window.location.pathname
+              }
+            });
+          } else {
+            console.error("Glance Cobrowse is not ready or has not been loaded yet.");
+          }
+        });
+      } else {
+          console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
+      }
+
+      const crossDomainLink = document.getElementById('cross-domain-link');
+      if (crossDomainLink) {
+        crossDomainLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          const destination = "https://american-equity-stagingx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600";
+
+          console.log("Link clicked. Checking for active Glance session...");
+
+          if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
+            console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
+
+            GLANCE.Cobrowse.Visitor.crossDomain().then(function() {
+              console.log("crossDomain() completed successfully. Navigating now.");
+              window.open(destination, "_blank");
+            }).catch(function(error) {
+              console.error("The crossDomain() process failed.", error);
+              window.open(destination, "_blank");
+            });
+
+          } else {
+            console.error("No active session found. Navigating directly.");
+            window.open(destination, '_blank');
+          }
+        });
+      }
     }
 
-    document.getElementById('cross-domain-link').addEventListener('click', function(e) {
-      e.preventDefault();
-      const destination = "https://american-equity-stagingx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600";
+    // Initialize handlers when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeGlanceHandlers);
+    } else {
+      initializeGlanceHandlers();
+    }
 
-      console.log("Link clicked. Checking for active Glance session...");
-
-      if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
-        console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
-        
-        GLANCE.Cobrowse.Visitor.crossDomain().then(function() {
-          console.log("crossDomain() completed successfully. Navigating now.");
-          window.open(destination, "_blank");
-        }).catch(function(error) {
-          console.error("The crossDomain() process failed.", error);
-          window.open(destination, "_blank");
-        });
-
-      } else {
-        console.error("No active session found. Navigating directly.");
-        window.open(destination, '_blank');
-      }
+    // Optional: Listen for Glance load event if available
+    window.addEventListener('glance_cobrowse_loaded', function() {
+      console.log("Glance Cobrowse script loaded and ready");
     });
   </script>
 
