@@ -19,11 +19,14 @@
   <p><strong>External → Unqork Setup:</strong> Removed helper.html, scripts on index for testing</p>
   <h1>External Domain (Origin)</h1>
   <p>Starting cobrowse session here, then navigating to Unqork destination.</p>
-  <p>currently pointing to: https://american-equity-qa-uatx.unqork.io </p>
-  
   <a href="#" id="start-cobrowse-jS">Generate Agent Code</a>
   <br><br>
-  <a href="#" id="cross-domain-link" style="color: blue; text-decoration: underline; cursor: pointer;">Go to Unqork Test Domain</a>
+  <p><strong>Go to Unqork Test Domain:</strong></p>
+  <a href="#" class="cross-domain-link" data-env="staging" style="color: blue; text-decoration: underline; cursor: pointer;">Staging</a>
+  <br>
+  <a href="#" class="cross-domain-link" data-env="qa-uat" style="color: blue; text-decoration: underline; cursor: pointer;">QA-UAT</a>
+  <br>
+  <a href="#" class="cross-domain-link" data-env="uat" style="color: blue; text-decoration: underline; cursor: pointer;">UAT</a>
 
 
   <script>
@@ -51,13 +54,20 @@
           console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
       }
 
-      const crossDomainLink = document.getElementById('cross-domain-link');
-      if (crossDomainLink) {
-        crossDomainLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          const destination = "https://american-equity-qa-uatx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600";
+      const destinations = {
+        'staging': 'https://american-equity-stagingx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600',
+        'qa-uat': 'https://american-equity-qa-uatx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600',
+        'uat': 'https://american-equity-uatx.unqork.io/app/financial-viability#/display/645add0ae050c111bc040600'
+      };
 
-          console.log("Link clicked. Checking for active Glance session...");
+      const crossDomainLinks = document.querySelectorAll('.cross-domain-link');
+      crossDomainLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const env = this.getAttribute('data-env');
+          const destination = destinations[env];
+
+          console.log("Link clicked for environment:", env, "Checking for active Glance session...");
 
           if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
             console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
@@ -75,7 +85,7 @@
             window.open(destination, '_blank');
           }
         });
-      }
+      });
     }
 
     // Initialize handlers when DOM is ready
