@@ -1,105 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>External to Unqork Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #1a1d1a;
+      --bg-card: rgba(42, 48, 42, 0.6);
+      --accent: #7c9a6e;
+      --accent-light: #a3c293;
+      --text-primary: #e8ebe5;
+      --text-muted: #9ca396;
+      --grid-color: rgba(124, 154, 110, 0.06);
+      --particle-color: #7c9a6e;
+    }
 
-  <script id="glance-cobrowse" 
-        charset="UTF-8" 
-        type="text/javascript" 
-        src="https://www.glancecdn.net/cobrowse/CobrowseJS.ashx?group=21483&site=staging" 
-        data-groupid="21483" 
-        data-site="staging" 
-        data-ws="www.glance.net" 
-        data-presence="on" 
-        data-cookietype="normal">
-  </script>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-dark);
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Subtle grid background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* Floating particles - slow and gentle */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--particle-color);
+      border-radius: 50%;
+      animation: float 35s infinite linear;
+      opacity: 0;
+    }
+
+    /* Varied particle sizes */
+    .particle.sm { width: 3px; height: 3px; }
+    .particle.md { width: 5px; height: 5px; }
+    .particle.lg { width: 7px; height: 7px; }
+
+    .particle:nth-child(1) { left: 5%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 10%; animation-delay: 3s; }
+    .particle:nth-child(3) { left: 15%; animation-delay: 6s; }
+    .particle:nth-child(4) { left: 20%; animation-delay: 1s; }
+    .particle:nth-child(5) { left: 25%; animation-delay: 8s; }
+    .particle:nth-child(6) { left: 30%; animation-delay: 4s; }
+    .particle:nth-child(7) { left: 35%; animation-delay: 10s; }
+    .particle:nth-child(8) { left: 40%; animation-delay: 2s; }
+    .particle:nth-child(9) { left: 45%; animation-delay: 7s; }
+    .particle:nth-child(10) { left: 50%; animation-delay: 5s; }
+    .particle:nth-child(11) { left: 55%; animation-delay: 9s; }
+    .particle:nth-child(12) { left: 60%; animation-delay: 1.5s; }
+    .particle:nth-child(13) { left: 65%; animation-delay: 11s; }
+    .particle:nth-child(14) { left: 70%; animation-delay: 3.5s; }
+    .particle:nth-child(15) { left: 75%; animation-delay: 6.5s; }
+    .particle:nth-child(16) { left: 80%; animation-delay: 0.5s; }
+    .particle:nth-child(17) { left: 85%; animation-delay: 8.5s; }
+    .particle:nth-child(18) { left: 90%; animation-delay: 4.5s; }
+    .particle:nth-child(19) { left: 95%; animation-delay: 12s; }
+    .particle:nth-child(20) { left: 8%; animation-delay: 2.5s; }
+    .particle:nth-child(21) { left: 22%; animation-delay: 7.5s; }
+    .particle:nth-child(22) { left: 38%; animation-delay: 10.5s; }
+    .particle:nth-child(23) { left: 52%; animation-delay: 13s; }
+    .particle:nth-child(24) { left: 68%; animation-delay: 5.5s; }
+    .particle:nth-child(25) { left: 82%; animation-delay: 9.5s; }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      5% { opacity: 0.4; }
+      95% { opacity: 0.4; }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Main container - clean glass */
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 60px 80px;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(124, 154, 110, 0.15);
+      border-radius: 16px;
+    }
+
+    /* Error code - clean typography */
+    .error-code {
+      font-size: 100px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -4px;
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    /* Main heading */
+    .heading {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin: 24px 0 12px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Subtext */
+    .subtext {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* CTA Button - minimal */
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+      color: var(--bg-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 30px;
+        margin: 20px;
+      }
+      .error-code {
+        font-size: 72px;
+      }
+      .heading {
+        font-size: 20px;
+      }
+      .subtext {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <p><strong>External → Unqork Setup:</strong> Removed helper.html, scripts on index for testing</p>
-  <h1>External Domain (Origin)</h1>
-  <p>Starting cobrowse session here, then navigating to Unqork destination.</p>
-  <a href="#" id="start-cobrowse-jS">Generate Agent Code</a>
-  <br><br>
-  <p><strong>Go to Unqork Test Domain:</strong></p>
-  <a href="#" class="cross-domain-link" data-env="staging" style="color: blue; text-decoration: underline; cursor: pointer;">Staging</a>
-  <br>
-  <a href="#" class="cross-domain-link" data-env="qa-uat" style="color: blue; text-decoration: underline; cursor: pointer;">QA-UAT</a>
-  <br>
-  <a href="#" class="cross-domain-link" data-env="uat" style="color: blue; text-decoration: underline; cursor: pointer;">UAT</a>
+  <!-- Grid background -->
+  <div class="grid-bg"></div>
 
+  <!-- Floating particles -->
+  <div class="particles">
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle lg"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle lg"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle lg"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle lg"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle lg"></div>
+    <div class="particle md"></div>
+    <div class="particle sm"></div>
+    <div class="particle md"></div>
+  </div>
 
-  <script>
-    // Wait for Glance to fully initialize before attaching event listeners
-    function initializeGlanceHandlers() {
-      const glanceButton = document.getElementById('start-cobrowse-jS');
-
-      if (glanceButton) {
-        glanceButton.addEventListener('click', function (e) {
-          e.preventDefault();
-
-          if (window.GLANCE?.Cobrowse?.Visitor?.startSession) {
-            // Use options object format as per Glance documentation
-            GLANCE.Cobrowse.Visitor.startSession({
-              sessionKey: "GLANCE_KEYTYPE_RANDOM",
-              customData: {
-                cleanUrl: window.location.origin + window.location.pathname
-              }
-            });
-          } else {
-            console.error("Glance Cobrowse is not ready or has not been loaded yet.");
-          }
-        });
-      } else {
-          console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
-      }
-
-      const destinations = {
-        'staging': 'https://american-equity-stagingx.unqork.io/app/financial-viability#/display/suitability',
-        'qa-uat': '	https://american-equity-qa-uatx.unqork.io/app/financial-viability#/display/suitability',
-        'uat': 'https://american-equity-uatx.unqork.io/app/financial-viability#/display/suitability'
-      };
-
-      const crossDomainLinks = document.querySelectorAll('.cross-domain-link');
-      crossDomainLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const env = this.getAttribute('data-env');
-          const destination = destinations[env];
-
-          console.log("Link clicked for environment:", env, "Checking for active Glance session...");
-
-          if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
-            console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
-
-            GLANCE.Cobrowse.Visitor.crossDomain().then(function() {
-              console.log("crossDomain() completed successfully. Navigating now.");
-              window.open(destination, "_blank");
-            }).catch(function(error) {
-              console.error("The crossDomain() process failed.", error);
-              window.open(destination, "_blank");
-            });
-
-          } else {
-            console.error("No active session found. Navigating directly.");
-            window.open(destination, '_blank');
-          }
-        });
-      });
-    }
-
-    // Initialize handlers when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeGlanceHandlers);
-    } else {
-      initializeGlanceHandlers();
-    }
-
-    // Optional: Listen for Glance load event if available
-    window.addEventListener('glance_cobrowse_loaded', function() {
-      console.log("Glance Cobrowse script loaded and ready");
-    });
-  </script>
-
+  <!-- Main content -->
+  <div class="container">
+    <div class="error-code">404</div>
+    <h1 class="heading">Looking for something?</h1>
+    <p class="subtext">This page doesn't exist</p>
+    <a href="mailto:milbrathdrew@gmail.com" class="cta-btn">Contact Domain Admin</a>
+  </div>
 </body>
 </html>

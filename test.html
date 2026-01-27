@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>External to Unqork Test</title>
+
+  <script id="glance-cobrowse" 
+        charset="UTF-8" 
+        type="text/javascript" 
+        src="https://www.glancecdn.net/cobrowse/CobrowseJS.ashx?group=21483&site=staging" 
+        data-groupid="21483" 
+        data-site="staging" 
+        data-ws="www.glance.net" 
+        data-presence="on" 
+        data-cookietype="normal">
+  </script>
+
+</head>
+<body>
+  <p><strong>External → Unqork Setup:</strong> Removed helper.html, scripts on index for testing</p>
+  <h1>External Domain (Origin)</h1>
+  <p>Starting cobrowse session here, then navigating to Unqork destination.</p>
+  <a href="#" id="start-cobrowse-jS">Generate Agent Code</a>
+  <br><br>
+  <p><strong>Go to Unqork Test Domain:</strong></p>
+  <a href="#" class="cross-domain-link" data-env="staging" style="color: blue; text-decoration: underline; cursor: pointer;">Staging</a>
+  <br>
+  <a href="#" class="cross-domain-link" data-env="qa-uat" style="color: blue; text-decoration: underline; cursor: pointer;">QA-UAT</a>
+  <br>
+  <a href="#" class="cross-domain-link" data-env="uat" style="color: blue; text-decoration: underline; cursor: pointer;">UAT</a>
+
+
+  <script>
+    // Wait for Glance to fully initialize before attaching event listeners
+    function initializeGlanceHandlers() {
+      const glanceButton = document.getElementById('start-cobrowse-jS');
+
+      if (glanceButton) {
+        glanceButton.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          if (window.GLANCE?.Cobrowse?.Visitor?.startSession) {
+            // Use options object format as per Glance documentation
+            GLANCE.Cobrowse.Visitor.startSession({
+              sessionKey: "GLANCE_KEYTYPE_RANDOM",
+              customData: {
+                cleanUrl: window.location.origin + window.location.pathname
+              }
+            });
+          } else {
+            console.error("Glance Cobrowse is not ready or has not been loaded yet.");
+          }
+        });
+      } else {
+          console.error("Could not find the Glance trigger element '#start-cobrowse-jS'.");
+      }
+
+      const destinations = {
+        'staging': 'https://american-equity-stagingx.unqork.io/app/financial-viability#/display/suitability',
+        'qa-uat': '	https://american-equity-qa-uatx.unqork.io/app/financial-viability#/display/suitability',
+        'uat': 'https://american-equity-uatx.unqork.io/app/financial-viability#/display/suitability'
+      };
+
+      const crossDomainLinks = document.querySelectorAll('.cross-domain-link');
+      crossDomainLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const env = this.getAttribute('data-env');
+          const destination = destinations[env];
+
+          console.log("Link clicked for environment:", env, "Checking for active Glance session...");
+
+          if (window.GLANCE?.Cobrowse?.Visitor?.inSession()) {
+            console.log("Session is active. Calling crossDomain() and waiting for it to complete...");
+
+            GLANCE.Cobrowse.Visitor.crossDomain().then(function() {
+              console.log("crossDomain() completed successfully. Navigating now.");
+              window.open(destination, "_blank");
+            }).catch(function(error) {
+              console.error("The crossDomain() process failed.", error);
+              window.open(destination, "_blank");
+            });
+
+          } else {
+            console.error("No active session found. Navigating directly.");
+            window.open(destination, '_blank');
+          }
+        });
+      });
+    }
+
+    // Initialize handlers when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeGlanceHandlers);
+    } else {
+      initializeGlanceHandlers();
+    }
+
+    // Optional: Listen for Glance load event if available
+    window.addEventListener('glance_cobrowse_loaded', function() {
+      console.log("Glance Cobrowse script loaded and ready");
+    });
+  </script>
+
+</body>
+</html>
