@@ -13,7 +13,7 @@
       --accent-light: #a3c293;
       --text-primary: #e8ebe5;
       --text-muted: #9ca396;
-      --grid-color: rgba(124, 154, 110, 0.06);
+      --grid-color: rgba(124, 154, 110, 0.12);
       --particle-color: #7c9a6e;
     }
 
@@ -33,7 +33,7 @@
       overflow: hidden;
     }
 
-    /* Subtle grid background */
+    /* 3D grid background - original implementation */
     .grid-bg {
       position: fixed;
       top: 0;
@@ -43,8 +43,14 @@
       background-image:
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
       z-index: 0;
+    }
+
+    @keyframes gridMove {
+      0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+      100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
     }
 
     /* Floating particles - slow and gentle */
